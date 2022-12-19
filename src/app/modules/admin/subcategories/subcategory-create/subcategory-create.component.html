@@ -1,0 +1,37 @@
+<!-- Subcategory Create and Edit -->
+<button mat-icon-button class="close-button" [mat-dialog-close]="false">
+    <mat-icon class="close-icon">close</mat-icon>
+</button>
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<mat-dialog-content class="text-center">
+    <form [formGroup]="subcategoryForm" (ngSubmit)="submitSubcategoryForm()" autocomplete="off">
+        <div class="row">
+            <div class="col-md-12">
+                <mat-form-field appearance="outline" class="w-100 mt-2">
+                    <mat-label>Subcategory Name</mat-label>
+                    <input matInput type="type" formControlName="name" alphabetOnly>
+                    <mat-error *ngIf="handleError('name', 'required')">Subcategory name required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-12">
+                <mat-form-field appearance="outline" class="w-100 mt-2">
+                    <mat-label>Category Name</mat-label>
+                    <mat-select formControlName="parentId">
+                        <ng-container *ngFor="let category of categoriesList">
+                            <mat-option [value]="category._id">
+                                {{category.name | titlecase}}
+                            </mat-option>
+                        </ng-container>
+                    </mat-select>
+                    <mat-error *ngIf="handleError('parentId', 'required')">Category name required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-12">
+                <div class="text-center mt-3 mb-3">
+                    <button type="submit" mat-raised-button color="primary">{{ data.submit }}</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<!-- Subcategory Create and Edit End -->

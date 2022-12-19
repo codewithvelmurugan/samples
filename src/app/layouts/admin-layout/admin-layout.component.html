@@ -1,0 +1,76 @@
+<div class="navbar-container" [class.example-is-mobile]="mobileQuery.matches">
+    <mat-toolbar class="navbar" color="primary">
+        <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <a class="navbar-brand" [routerLink]="['/admin/dashboard']">E-Commerce App</a>
+        <span class="navbar-spacer"></span>
+        <a mat-button [matMenuTriggerFor]="userMenu">
+            <span class="ml-2">{{userData.username}}</span>
+            <button mat-icon-button>
+                <mat-icon>account_circle</mat-icon>
+            </button>
+        </a>
+        <mat-menu #userMenu="matMenu">
+            <a mat-menu-item (click)="logout()">
+                <mat-icon>person</mat-icon>
+                <span>Log out</span>
+            </a>
+        </mat-menu>
+    </mat-toolbar>
+    <mat-sidenav-container class="navbar-sidenav-container">
+        <mat-sidenav class="sidenav" #sidenav [opened]="!mobileQuery.matches"
+            [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+            <mat-nav-list>
+                <a mat-list-item [routerLink]="['/admin/dashboard']" routerLinkActive="active">
+                    <mat-icon mat-list-icon>dashboard</mat-icon>
+                    <p mat-line>Dashboard</p>
+                </a>
+                <a mat-list-item [routerLink]="['/admin/categories']" routerLinkActive="active">
+                    <mat-icon mat-list-icon>format_list_bulleted</mat-icon>
+                    <p mat-line>Categories</p>
+                </a>
+                <a mat-list-item [routerLink]="['/admin/subcategories']" routerLinkActive="active">
+                    <mat-icon mat-list-icon>list</mat-icon>
+                    <p mat-line>Subcategories</p>
+                </a>
+                <a mat-list-item [routerLink]="['/admin/products']" routerLinkActive="active">
+                    <mat-icon mat-list-icon>shopping_bag</mat-icon>
+                    <p mat-line>Products</p>
+                </a>
+                <a mat-list-item [routerLink]="['/admin/coupons']" routerLinkActive="active">
+                    <mat-icon mat-list-icon>sell</mat-icon>
+                    <p mat-line>Coupons</p>
+                </a>
+                <a mat-list-item [routerLink]="['/admin/orders']" routerLinkActive="active">
+                    <mat-icon mat-list-icon>task_alt</mat-icon>
+                    <p mat-line>Orders</p>
+                </a>
+                <a mat-list-item [routerLink]="['/admin/customers']" routerLinkActive="active">
+                    <mat-icon mat-list-icon>people</mat-icon>
+                    <p mat-line>Customers</p>
+                </a>
+                <!-- <mat-accordion>
+                    <mat-expansion-panel class="mat-elevation-z0">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title style="color:#000;">Pages</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-nav-list>
+                            <a mat-list-item [routerLink]="['/admin/banner']" routerLinkActive="active">
+                                <mat-icon mat-list-icon>image</mat-icon>
+                                <p mat-line>Banner</p>
+                            </a>
+                        </mat-nav-list>
+                    </mat-expansion-panel>
+                </mat-accordion> -->
+                <a mat-list-item (click)="logout()">
+                    <mat-icon mat-list-icon>exit_to_app</mat-icon>
+                    <p mat-line>Log out</p>
+                </a>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

@@ -1,0 +1,44 @@
+<!-- Login -->
+<section class="auth-container">
+    <div class="auth-content">
+        <mat-card class="mat-elevation-z8">
+            <mat-card-title class="text-center mt-3 mb-4">Welcome to E-Commerce App</mat-card-title>
+            <mat-card-content>
+                <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()" autocomplete="off">
+                    <mat-form-field appearance="outline" class="w-100 mt-2">
+                        <mat-label>Email ID</mat-label>
+                        <input matInput type="email" formControlName="email">
+                        <mat-icon matSuffix>email</mat-icon>
+                        <mat-error *ngIf="isSubmitted && loginDetails['email'].errors?.required">Please enter Email
+                            ID</mat-error>
+                        <mat-error
+                            *ngIf="isSubmitted && loginDetails['email'].errors?.email && loginDetails['email'].errors?.pattern">Email
+                            ID not valid</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Password</mat-label>
+                        <input matInput [type]="passwordHide ? 'password' : 'text'" formControlName="password">
+                        <button type="button" mat-icon-button matSuffix (click)="passwordHide = !passwordHide">
+                            <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="isSubmitted && loginDetails['password'].errors?.required">Please enter
+                            Password</mat-error>
+                        <mat-error *ngIf="isSubmitted && loginDetails['password'].errors?.minlength">Please enter at
+                            least 6
+                            letters</mat-error>
+                    </mat-form-field>
+                    <div class="float-end mb-3">
+                        <a (click)="routeToForgot()">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="w-100" mat-raised-button color="primary">Login</button>
+                </form>
+                <button type="button" class="w-100 mt-3" mat-raised-button (click)="googleLink()">Sign with
+                    Google</button>
+            </mat-card-content>
+            <mat-card-actions>
+                <p class="text-center">Don't have an account?&nbsp;<a (click)="routeToRegister()">Register</a></p>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</section>
+<!-- Login End -->

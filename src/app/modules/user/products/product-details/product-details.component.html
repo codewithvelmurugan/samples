@@ -1,0 +1,32 @@
+<!-- Product Details -->
+<section class="page-padding">
+    <div class="container">
+        <div class="row" *ngIf="productsDetailsList">
+            <div class="col-md-5">
+                <img class="img-fluid" [src]="productsDetailsList.imageUrl[0]" alt="">
+            </div>
+            <div class="col-md-7">
+                <h2 class="m-0">{{productsDetailsList.title | titlecase}}</h2>
+                <ngx-stars [readonly]="true" [initialStars]="productsDetailsList.ratings" [maxStars]="5"
+                    [color]="'#ffd740'">
+                </ngx-stars>
+                <p>{{productsDetailsList.description}}</p>
+                <p>
+                    <span class="text-decoration-line-through">&#8377;{{productsDetailsList.price}}</span>
+                    &nbsp;
+                    <span>({{productsDetailsList.priceDiscount}}%off)</span>
+                </p>
+                <p class="fw-bold">&#8377;{{productsDetailsList.priceAfterDiscount}}</p>
+                <div class="row">
+                    <div class="col-md-2">
+                        <button mat-raised-button color="primary" (click)="addtocart()">Add to cart</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button mat-raised-button color="primary" (click)="buyNow()">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Details End -->

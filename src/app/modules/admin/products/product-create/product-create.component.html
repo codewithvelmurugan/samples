@@ -1,0 +1,94 @@
+<!-- Product Create and Edit -->
+<button mat-icon-button class="close-button" [mat-dialog-close]="false">
+    <mat-icon class="close-icon">close</mat-icon>
+</button>
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<mat-dialog-content class="text-center">
+    <form [formGroup]="productsForm" (ngSubmit)="submitProductsForm()" autocomplete="off">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="file-upload">
+                    <img *ngIf="isproductImage" class="img-fluid" [src]="defaultImage" alt="">
+                    <ng-container *ngFor="let imageUrl of productImage">
+                        <img *ngIf="!isproductImage" class="img-fluid" [src]="imageUrl" alt="">
+                    </ng-container>
+                </div>
+                <div>
+                    <input #productInput type="file" multiple hidden (change)="onChangeFile($event)">
+                    <button type="button" mat-icon-button (click)="productInput.click()">
+                        <mat-icon class="material-icons-outlined">edit</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field appearance="outline" class="w-100 mt-2">
+                    <mat-label>Products Name</mat-label>
+                    <input matInput type="type" formControlName="title" alphabetOnly>
+                    <mat-error *ngIf="handleError('title', 'required')">Products name
+                        required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field appearance="outline" class="w-100 mt-2">
+                    <mat-label>Products Description</mat-label>
+                    <input matInput type="type" formControlName="description">
+                    <mat-error *ngIf="handleError('description', 'required')">Products description
+                        required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field appearance="outline" class="w-100 mt-2">
+                    <mat-label>Subcategory Name</mat-label>
+                    <mat-select formControlName="subcategoryId">
+                        <ng-container *ngFor="let category of categoriesList">
+                            <ng-container *ngFor="let subcategory of category.subcategories">
+                                <mat-option [value]="subcategory._id">
+                                    {{subcategory.name | titlecase}}
+                                </mat-option>
+                            </ng-container>
+                        </ng-container>
+                    </mat-select>
+                    <mat-error *ngIf="handleError('subcategoryId', 'required')">Subcategory name
+                        required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field appearance="outline" class="w-100 mt-2">
+                    <mat-label>Price</mat-label>
+                    <input matInput type="type" formControlName="price" numberOnly>
+                    <mat-error *ngIf="handleError('price', 'required')">Price required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field appearance="outline" class="w-100 mt-2">
+                    <mat-label>Discount</mat-label>
+                    <input matInput type="type" formControlName="priceDiscount" numberOnly>
+                    <mat-error *ngIf="handleError('priceDiscount', 'required')">Discount
+                        required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field appearance="outline" class="w-100 mt-2">
+                    <mat-label>Quantity</mat-label>
+                    <input matInput type="type" formControlName="quantity" numberOnly>
+                    <mat-error *ngIf="handleError('quantity', 'required')">Quantity required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field appearance="outline" class="w-100 mt-2">
+                    <mat-label>Sold</mat-label>
+                    <input matInput type="type" formControlName="sold" numberOnly>
+                    <mat-error *ngIf="handleError('quantity', 'required')">Sold required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-12">
+                <div class="text-center mt-3 mb-3">
+                    <button type="submit" mat-raised-button color="primary">{{ data.submit }}</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<!-- Product Create and Edit End -->

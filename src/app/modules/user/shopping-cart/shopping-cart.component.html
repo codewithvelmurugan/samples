@@ -1,0 +1,79 @@
+<!-- Cart -->
+<section class="cart-list bg-grey page-padding">
+    <div class="container">
+        <ng-container *ngIf="isShowCartItem">
+            <ng-container *ngFor="let cart of cartList">
+                <ng-container *ngFor="let item of cart.products">
+                    <mat-card class="mat-elevation-z2 mb-4">
+                        <mat-card-content>
+                            <div class="card-item-content">
+                                <div class="row">
+                                    <div class="col-md-2 text-center">
+                                        <img [src]="item.productId.imageUrl[0]" [alt]="item.productId.title">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>{{item.productId.title | titlecase}}</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="stepper-quantity">
+                                            <button type="button" mat-icon-button class="plusminus"
+                                                (click)="handleMinus(item)">
+                                                <mat-icon>remove</mat-icon>
+                                            </button>
+                                            <input type="number" min="1" max="10" value="0" [(ngModel)]="item.quantity">
+                                            <button type="button" mat-icon-button class="plusminus"
+                                                (click)="handlePlus(item)">
+                                                <mat-icon>add</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>&#8377; {{item.totalProductPrice * item.quantity | number : '1.2-2'}}</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="cart-delete">
+                                            <button type="button" mat-icon-button
+                                                (click)="removecart(item.productId._id)">
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </ng-container>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="float-end">
+                            <div class="row mb-3">
+                                <div class="col-md-4 mb-2">
+                                    <p><b>Total:</b></p>
+                                </div>
+                                <div class="col-md-8 mb-2">
+                                    <p>&#8377; {{cart.totalPrice | number : '1.2-2'}}</p>
+                                </div>
+                            </div>
+                            <button type="button" mat-raised-button color="primary" (click)="checkout()">Place
+                                Order</button>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+        <ng-container *ngIf="!isShowCartItem">
+            <div class="empty-cart">
+                <div class="empty-cart-img">
+                    <img [src]="nocart" alt="cart">
+                </div>
+                <div class="empty-cart-content">
+                    <h1>Your cart is empty!</h1>
+                    <p>Add items to it now.</p>
+                    <button type="button" mat-raised-button color="primary" [routerLink]="['/user/home']">Shop
+                        now</button>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</section>
+<!-- Cart End -->
